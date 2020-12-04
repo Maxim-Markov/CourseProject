@@ -14,12 +14,12 @@ namespace CourseProject.Other_classes
         private Word.Application wordapp;
         private Word.Document worddocument;
         //открывает документ по указанному пути
-        public bool OpenWord(string fullpath,bool isReadonly)
+        public bool OpenWord(string fullpath,bool isReadonly, bool isVisible)
         {
             object oMissing = System.Reflection.Missing.Value;
             object oEndOfDoc = "\\endofdoc"; /* \endofdoc is a predefined bookmark */
             wordapp = new Word.Application();
-            wordapp.Visible=false;
+            wordapp.Visible=isVisible;
             Object filename = fullpath;
             Object confirmConversions = false;
             Object readOnly = isReadonly;

@@ -13,7 +13,7 @@
         <Button Name="SaveButton"  Content="Сохранить результат" HorizontalAlignment="Left" Margin="589,41,0,0" VerticalAlignment="Top" Width="160"  Click="SaveButton_Click"/>
         <TextBox Name ="KeyBox" HorizontalAlignment="Left" Height="23" Margin="40,225,0,0" TextWrapping="Wrap" Text="скорпион" VerticalAlignment="Top" Width="335" FontFamily="Times New Roman" FontSize="14"/>
         <Button x:Name="ImportButton"  Content="Загрузить из файла" HorizontalAlignment="Left" Margin="382,41,0,0" VerticalAlignment="Top" Width="150"  Click="ImportButton_Click" />
-        <TextBox Name="DataIn" VerticalScrollBarVisibility="Auto" IsReadOnly="False" IsReadOnlyCaretVisible="True" HorizontalAlignment="Left" Height="114" Margin="40,71,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="709" Grid.ColumnSpan="2" FontFamily="Times New Roman" FontSize="14" TextChanged="DataIn_TextChanged"/>
+        <TextBox Name="DataIn" VerticalScrollBarVisibility="Auto" IsReadOnly="True" HorizontalAlignment="Left" Height="114" Margin="40,71,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="709" Grid.ColumnSpan="2" FontFamily="Times New Roman" FontSize="14" TextChanged="DataIn_TextChanged"/>
         <TextBox x:Name="DataOut" VerticalScrollBarVisibility="Auto" IsReadOnly="True"  HorizontalAlignment="Left" Height="114" Margin="40,257,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="709" Grid.ColumnSpan="2" FontFamily="Times New Roman" FontSize="14"/>
         <Menu Height="25" VerticalAlignment="Top" Background="LightGray" Grid.ColumnSpan="2">
             <MenuItem>

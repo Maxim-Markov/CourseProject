@@ -44,12 +44,12 @@ namespace CourseProject
 
         private void ImportButton_Click(object sender, RoutedEventArgs e)
         {
-            string[] imported = fileImporter.ImportFile(true);
+            inpContent = fileImporter.ImportFile(true);
             DataIn.Text = "";
             DataOut.Text = "";
             outContent = null;
-            if (imported == null) return;
-            foreach (string item in imported)
+            if (inpContent == null) return;
+            foreach (string item in inpContent)
             {
                 DataIn.Text += item;
             }
@@ -137,12 +137,12 @@ namespace CourseProject
 
         private void Load_txt_Click(object sender, RoutedEventArgs e)
         {
-            string[] imported = fileImporter.ImportFile(false);
+            inpContent = fileImporter.ImportFile(false);
             DataIn.Text = "";
             DataOut.Text = "";
             outContent = null;
-            if (imported == null) return;
-            foreach (string item in imported)
+            if (inpContent == null) return;
+            foreach (string item in inpContent)
             {
                 DataIn.Text += item;
             }
@@ -271,12 +271,14 @@ namespace CourseProject
 
         private void DataIn_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
+            /*
             List<string> list = new List<string>();
             for (int i = 0; i < DataIn.LineCount; i++)
             {
                 list.Add(DataIn.GetLineText(i));   
             }
             inpContent = list.ToArray();
+            */
         }
     }
 }

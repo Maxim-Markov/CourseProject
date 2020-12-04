@@ -96,7 +96,7 @@ namespace CourseProject.Other_classes
             }
             if (ofd.FileName != "") // проверка на выбор файла
             {
-                if (!wh.OpenWord(ofd.FileName, true)) return null;//открываем файл для чтения
+                if (!wh.OpenWord(ofd.FileName, true,false)) return null;//открываем файл для чтения
                 string[] allText = wh.GetAllText();
                 wh.CloseWord();
                 return allText;
@@ -157,7 +157,7 @@ namespace CourseProject.Other_classes
             if (ofd.FileName != "") // проверка на выбор файла
             {
                 
-                return wh.OpenWord(ofd.FileName,false);
+                return wh.OpenWord(ofd.FileName,false,true);
             }
             else
             {
