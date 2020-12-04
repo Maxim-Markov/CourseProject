@@ -1,0 +1,69 @@
+﻿<Window x:Class="CourseProject.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CourseProject"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="420" Width="800" Closing="Window_Closing" ResizeMode="NoResize" Icon="images/cat.ico">
+    <Grid>
+       
+        <Button Name="DecryptButton"  Content="Расшифровать" HorizontalAlignment="Left" Margin="440,222,0,0" VerticalAlignment="Top" Width="111"  Click="DecryptButton_Click" />
+        <Label  Content="Укажите ключ, используя только буквы русского алфавита" HorizontalAlignment="Left" Margin="40,190,0,0" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="14" FontWeight="Bold"/>
+        <Button Name="SaveButton"  Content="Сохранить результат" HorizontalAlignment="Left" Margin="589,41,0,0" VerticalAlignment="Top" Width="160"  Click="SaveButton_Click"/>
+        <TextBox Name ="KeyBox" HorizontalAlignment="Left" Height="23" Margin="40,225,0,0" TextWrapping="Wrap" Text="скорпион" VerticalAlignment="Top" Width="335" FontFamily="Times New Roman" FontSize="14"/>
+        <Button x:Name="ImportButton"  Content="Загрузить из файла" HorizontalAlignment="Left" Margin="382,41,0,0" VerticalAlignment="Top" Width="150"  Click="ImportButton_Click" />
+        <TextBox Name="DataIn" VerticalScrollBarVisibility="Auto" IsReadOnly="False" IsReadOnlyCaretVisible="True" HorizontalAlignment="Left" Height="114" Margin="40,71,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="709" Grid.ColumnSpan="2" FontFamily="Times New Roman" FontSize="14" TextChanged="DataIn_TextChanged"/>
+        <TextBox x:Name="DataOut" VerticalScrollBarVisibility="Auto" IsReadOnly="True"  HorizontalAlignment="Left" Height="114" Margin="40,257,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="709" Grid.ColumnSpan="2" FontFamily="Times New Roman" FontSize="14"/>
+        <Menu Height="25" VerticalAlignment="Top" Background="LightGray" Grid.ColumnSpan="2">
+            <MenuItem>
+                <MenuItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Height="20" Width="12" Fill="White" Margin="0 0 5 0" StrokeThickness="2" StrokeDashArray="2 2" Stroke="Black" StrokeDashCap="Round" RadiusX="2" RadiusY="2" />
+                        <TextBlock>Файл</TextBlock>
+                    </StackPanel>
+
+                </MenuItem.Header>
+                <MenuItem Header="Загрузить из файла">
+                    <MenuItem x:Name="Load_docx"  Header=".docx" Click="Load_docx_Click"></MenuItem>
+                    <MenuItem x:Name="Load_txt" Header=".txt" Click="Load_txt_Click" ></MenuItem>
+                </MenuItem>
+                <MenuItem Header="Открыть файл" HorizontalAlignment="Left" Width="196" >
+                    <MenuItem x:Name="Open_docx" Header=".docx" Click="Open_docx_Click"/>
+                    <MenuItem x:Name="Open_txt" Header=".txt" Click="Open_txt_Click" />
+                </MenuItem>
+                <MenuItem Header="Сохранить как"  >
+                    <MenuItem Header="Выбрать папку">
+                        <MenuItem x:Name="Save_cond_docx" Header=".docx" Click="Save_cond_docx_Click"></MenuItem>
+                        <MenuItem x:Name="Save_cond_txt" Header=".txt" Click="Save_cond_txt_Click" ></MenuItem>
+                    </MenuItem>
+                    <MenuItem Header="Ввести путь вручную" >
+                        <MenuItem x:Name="Save_direct_docx" Header=".docx" Click="Save_direct_docx_Click"></MenuItem>
+                        <MenuItem x:Name="Save_direct_txt" Header=".txt" Click="Save_direct_txt_Click" ></MenuItem>
+                    </MenuItem>
+                </MenuItem>
+                <Separator />
+                <MenuItem x:Name="Exit" Header="Выход" Click="Exit_Click" ></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Действия">
+                <MenuItem.Icon>
+                    <Image Source="images/edit.png"></Image>
+                </MenuItem.Icon>
+                <MenuItem x:Name="MenuEncrypt" Header="Зашифровать текст" Click="MenuEncrypt_Click" ></MenuItem>
+                <MenuItem x:Name="MenuDecrypt" Header="Расшифровать текст" Click="MenuDecrypt_Click" ></MenuItem>
+                <MenuItem Header="Указать ключ" >
+                    <TextBox Name="MenuKeyBox" Width="150" TextWrapping="NoWrap" MaxLength="30" TextChanged="MenuKeyBox_TextChanged"></TextBox>
+                    <MenuItem x:Name="MenuKeyEnter" Header="Указать ключ с проверкой" Click="MenuKeyEnter_Click" ></MenuItem>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Вид">
+                <MenuItem.Icon>
+                    <Image Source="images/view.jpg"></Image>
+                </MenuItem.Icon>
+                <CheckBox x:Name="Beatify" Content="сделать красиво" IsChecked="False" Click="Beatify_Click"/>
+            </MenuItem>
+        </Menu>
+        
+        <Button x:Name="EncryptButton"  Content="Зашифровать" HorizontalAlignment="Left" Margin="611,222,0,0" VerticalAlignment="Top" Width="111"  Click="EncryptButton_Click" />
+    </Grid>
+</Window>
