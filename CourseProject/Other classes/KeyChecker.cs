@@ -7,6 +7,7 @@ namespace CourseProject.Other_classes
 {
     public class KeyChecker
     {
+        //проверяет корректность введённого в окно KeyWindow ключа и не позволяет пользователю вводить недопустимые символы
         public static void CheckKey(object sender, ICollection<TextChange> changes)
         {
             KeyWindow window = sender as KeyWindow;

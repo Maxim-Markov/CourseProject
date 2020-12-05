@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using Microsoft.Win32;
 using System.Windows;
-
-using System.Reflection;
 using System.Diagnostics;
 
 namespace CourseProject.Other_classes
@@ -16,6 +12,7 @@ namespace CourseProject.Other_classes
     public class FileImporter
     {
         private static WordHandler wh = new WordHandler();
+        //позволяет загрузить массив строк текста из файла с указанием формата .docx(.doc) или .txt
         public string[] ImportFile(bool isWordFormat)
         {
             if (isWordFormat)
@@ -27,7 +24,7 @@ namespace CourseProject.Other_classes
                 return ImportTxtFile();
             }
         }
-
+        //позволяет открыть файл в приложении указанием формата .docx(.doc) или .txt
         public bool OpenFile(bool isWordFormat)
         {
             if (isWordFormat)
@@ -42,6 +39,7 @@ namespace CourseProject.Other_classes
 
         private string[] ImportTxtFile()
         {
+            //открываем проводник
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "Text documents (.txt)|*.txt";
             try
@@ -57,21 +55,43 @@ namespace CourseProject.Other_classes
             {
                 string[] allText = null;
                 List<string> allEditedText = new List<string>();
+
+                //проверка на кодировку UTF или дефолтную системы
+                Byte[] bytes = File.ReadAllBytes(ofd.FileName);
+                    Encoding encoding = null;
+                    String text = null;
+                UTF8Encoding encUtf8NoBom = new UTF8Encoding(false, true);
+                try
+                { 
+                text = encUtf8NoBom.GetString(bytes);
+                encoding = encUtf8NoBom;
+                  }
+                 catch (ArgumentException)
+            {
+                // Подтверждение, что кодировка не UTF8
+            }
+        
+                //используем кодировку системы по умолчанию
+                if (encoding == null)
+                {
+                 encoding = Encoding.Default;
+                }
+
                 try
                 {
-                    allText = File.ReadAllLines(ofd.FileName);
-
-                    foreach (string item in allText)
-                    {
-                        if(item != "") allEditedText.Add(item + "\r");
-                    }
-                    
+                    allText = File.ReadAllLines(ofd.FileName, encoding);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                     return null;
                 }
+                foreach (string item in allText)
+                    {
+                        if(item != "") 
+                        allEditedText.Add(item + "\r");
+                    
+                    }  
                 return allEditedText.ToArray();
             }
             else
@@ -124,7 +144,7 @@ namespace CourseProject.Other_classes
             {
                 try
                 {
-                    Process.Start(ofd.FileName);
+                    Process.Start(ofd.FileName);//откроется в связанном с типом формата приложении
 
                 }
                 catch (Exception ex)
@@ -157,7 +177,7 @@ namespace CourseProject.Other_classes
             if (ofd.FileName != "") // проверка на выбор файла
             {
                 
-                return wh.OpenWord(ofd.FileName,false,true);
+                return wh.OpenWord(ofd.FileName,false,true);//с возможностью редактирования документа
             }
             else
             {

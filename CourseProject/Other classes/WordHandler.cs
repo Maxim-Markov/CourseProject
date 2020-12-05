@@ -9,6 +9,7 @@ using System.Reflection;
 
 namespace CourseProject.Other_classes
 {
+    //каждый объект класса ассоциирован со своим собственным приложением Word и документом в нём
     public class WordHandler
     {
         private Word.Application wordapp;
@@ -39,7 +40,7 @@ namespace CourseProject.Other_classes
             Object xmlTransform = Type.Missing;
             try
             {
-#if OFFICEXP
+#if OFFICEXP//если установлен OfficeXp
                worddocument = wordapp.Documents.Open2000(ref filename,
             ref confirmConversions, ref readOnly, ref addToRecentFiles,
           ref passwordDocument, ref passwordTemplate, ref revert,
@@ -65,7 +66,7 @@ namespace CourseProject.Other_classes
             }
         }
 
-        //закрывает указанное приложение 
+        //закрывает приложение для объекта текущего класса
         public bool CloseWord()
         {
             bool isSuccess = true;
@@ -74,12 +75,15 @@ namespace CourseProject.Other_classes
             Object routeDocument = Type.Missing;
             try
             {
-                wordapp.Quit(ref saveChanges,
-                             ref originalFormat, ref routeDocument);
+                if (wordapp != null)
+                {
+                    wordapp.Quit(ref saveChanges,
+                                 ref originalFormat, ref routeDocument);
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                
                 isSuccess = false;
             }
             finally
@@ -88,7 +92,7 @@ namespace CourseProject.Other_classes
             }
             return isSuccess;
         }
-
+        //записывает текст из текущего документа в массив строк - каждый абзац с новой строки
         public string[] GetAllText()
         {
             Word.Paragraphs wordparagraphs = null;
@@ -118,7 +122,7 @@ namespace CourseProject.Other_classes
             }
             return allText;
         }
-
+        //записывает текст из массива строк в документ, каждый элемент массива - новый абзац
         public bool WriteAllText(string[] content)
         {
             //Получаем ссылки на параграфы документа
@@ -147,7 +151,7 @@ namespace CourseProject.Other_classes
             }
             return true;
         }
-
+        //открывает приложение Word и создаёт новый документ
         public bool CreateDocument()
         {
             Object template = Type.Missing;
@@ -168,7 +172,7 @@ namespace CourseProject.Other_classes
             }
             return true;
         }
-
+        //сохраняет документ
         public bool SaveDocument(string fullpath)
         {
             Object fileName = fullpath;
@@ -204,6 +208,12 @@ namespace CourseProject.Other_classes
                 return false;
             }
             return true;
+        }
+        ~WordHandler()
+        {
+            CloseWord();
+            worddocument = null;
+            wordapp = null;
         }
     }
 }

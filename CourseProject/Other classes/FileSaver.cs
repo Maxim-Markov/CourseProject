@@ -16,7 +16,8 @@ namespace CourseProject
         {
             return SaveFile(content, false, false, true);
         }
-
+        //сохраняет файл с указанием текста для записи, включение предупреждений о перезаписи, 
+        //способ указания пути и имени файла, формат файла .docx(doc) или .txt
         public bool SaveFile(string[] content, bool isOverwriteExisting, bool isDirect, bool isWordFile)
         {
             if (isDirect)
@@ -86,7 +87,7 @@ namespace CourseProject
             }
 
         }
-
+        
         private bool SaveWordFile(string[] content, string filePath)
         {
 
@@ -104,11 +105,14 @@ namespace CourseProject
             {
                 File.WriteAllLines(filePath, content);
             }
-            catch (Exception) { return false; }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+                return false; 
+            }
             return true;
         }
 
-        //Позволяет создать файл .docx с возможностю выбора перезаписи существующих
+        //Позволяет выявить у пользователя корректный путь и имя файла
         private string GetDirectPath(bool isOverwriteExisting, bool isWordFile)
         {
             PathToSaveWind pathWind = new PathToSaveWind();//открытие нового окна для указания директории и имени файла
